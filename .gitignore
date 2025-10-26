@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs and caches
+*.log
+*.tmp
+.cache/
+node_modules/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python / Go / Rust build output
+__pycache__/
+target/
+bin/
+dist/
