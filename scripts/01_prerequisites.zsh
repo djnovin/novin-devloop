@@ -7,11 +7,11 @@ set -euo pipefail
 # ======================================================
 if ! xcode-select -p &>/dev/null; then
     echo "Installing Xcode Command Line Tools..."
-    xcode-select --install || true
+    xcode-select --install
 
-    echo "Waiting for Xcode Command Line Tools to finish installing..."
+    echo "Waiting for installation to complete..."
     until xcode-select -p &>/dev/null; do
-        sleep 20
+        sleep 5
     done
 
     echo "Xcode Command Line Tools installed."
@@ -26,14 +26,13 @@ if ! command -v brew &>/dev/null; then
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    if [ -d "/opt/homebrew/bin" ]; then
+    # Add Homebrew to PATH for Apple Silicon Macs
+    if [[ -f "/opt/homebrew/bin/brew" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [ -d "/usr/local/bin" ]; then
-        eval "$(/usr/local/bin/brew shellenv)"
     fi
 else
     echo "Homebrew already installed."
 fi
 
+echo "Updating Homebrew..."
 brew update
-brew upgrade
